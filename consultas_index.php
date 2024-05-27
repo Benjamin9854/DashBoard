@@ -1,12 +1,10 @@
 <?php
     include("conexion.php");
 
-    //VENTAS
-    //PREGUNTA 1
-    //Obtener las ventas por su año en la FECHA
+    //Obtener las ganancias del ultimo mes
     function ventasPregunta1(){
         $conexion=conexion_db();
-        $consulta= "SELECT * FROM ventas WHERE Fecha > '2019-12-31'";
+        $consulta= "SELECT SUM(Precio_Unitario * Cantidad) AS Ganancia_Ultimo_Mes FROM ventas WHERE Fecha > '2024-03-31' AND Fecha < '2024-05-01'";
         $result=mysqli_query($conexion, $consulta);
         return $result;
     }
