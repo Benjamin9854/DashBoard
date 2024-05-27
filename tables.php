@@ -4,7 +4,7 @@ $conexion = conexion_db();
 
 $table = isset($_GET['table']) ? $_GET['table'] : 'empleados';
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$records_per_page = 50; // Cambiado a 50 registros por página
+$records_per_page = 100; // Cambiado a 100 registros por página
 $offset = ($page - 1) * $records_per_page;
 
 // Obtener columnas de la tabla
@@ -192,7 +192,7 @@ $total_pages = ceil($total_records / $records_per_page);
                     <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
