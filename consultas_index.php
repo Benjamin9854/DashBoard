@@ -1,23 +1,42 @@
 <?php
     include("conexion.php");
 
-    //Obtener las ganancias del ultimo mes
-    function ventasPregunta1(){
+    //Obtener las ganancias del mes actual
+    function GananciaMesActual(){
         $conexion=conexion_db();
-        $consulta= "SELECT SUM(Precio_Unitario * Cantidad) AS Ganancia_Ultimo_Mes FROM ventas WHERE Fecha > '2024-03-31' AND Fecha < '2024-05-01'";
+        $consulta= "SELECT SUM(Precio_Unitario * Cantidad) AS Ganancia_Mes_Actual FROM ventas WHERE Fecha > '2024-04-30' AND Fecha < '2024-06-01'";
         $result=mysqli_query($conexion, $consulta);
         return $result;
     }
 
-    //VENTAS
-    //PREGUNTA 2
-    //Obtener las 50 ventas con mas CANTIDAD
-    function ventasPregunta2(){
+
+    //Obtener las ganacias del año actual
+    function GananciasAnnoActual(){
         $conexion=conexion_db();
-        $consulta= "SELECT * FROM ventas ORDER BY Cantidad DESC LIMIT 50";
+        $consulta= "SELECT SUM(Precio_Unitario * Cantidad) AS Ganancia_Anno_Actual FROM ventas WHERE Fecha > '2023-12-31' AND Fecha < '2025-01-01'";
         $result=mysqli_query($conexion, $consulta);
         return $result;
     }
+
+    //Pais con mas ventas
+    function PaisMayorVentas(){
+        $conexion=conexion_db();
+        $consulta= "SELECT subquery.Pais, SUM(subquery.Cantidad) AS TotalCantidad FROM ( SELECT ventas.ID_Cliente, clientes.Pais, ventas.Cantidad, ventas.Precio_Unitario FROM ventas INNER JOIN clientes ON ventas.ID_Cliente = clientes.ID_Cliente ) AS subquery GROUP BY subquery.Pais ORDER BY `TotalCantidad` DESC";
+        $result=mysqli_query($conexion, $consulta);
+        return $result;
+    }
+
+    //Producto mas vendido
+    function ProductoMasVendido(){
+        $conexion=conexion_db();
+        $consulta= "SELECT subquery.Nombre, SUM(subquery.Cantidad) AS TotalCantidad FROM ( SELECT ventas.ID_producto, .Pais, ventas.Cantidad, ventas.Precio_Unitario FROM ventas INNER JOIN clientes ON ventas.ID_Cliente = clientes.ID_Cliente ) AS subquery GROUP BY subquery.Pais ORDER BY `TotalCantidad` DESC";
+        $result=mysqli_query($conexion, $consulta);
+        return $result;
+    }
+
+
+
+
 
     //VENTAS
     //PREGUNTA 3
