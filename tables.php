@@ -1,6 +1,5 @@
 <?php
     include("conexion.php");
-    include("function.js");
     $conexion = conexion_db();
     $table = isset($_GET['table']) ? $_GET['table'] : 'empleados';
     $consulta = "SELECT * FROM $table";
