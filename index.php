@@ -2,7 +2,8 @@
     include("consultas_index.php");
     $ganancia_mensual = GananciaMesActual();
     $ganancia_anual = GananciasAnnoActual();
-    $pais_mayor_ventas = PaisMayorVentas()
+    $pais_mayor_ventas = PaisMayorVentas();
+    $producto_mas_vendido = ProductoMasVendido();
 ?>
 
 
@@ -226,7 +227,13 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Producto mas vendido</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Celular Iphone</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php 
+                                                    if ($fila = mysqli_fetch_array($producto_mas_vendido)) {
+                                                        echo $fila['Nombre'];
+                                                    }
+                                                    ?>
+                                                </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -243,6 +250,11 @@
                     <div class="row">
 
                         <!-- GRAFICO -->
+                        <?php
+                            $ganancias_doce_meses = GananciasDoceMeses();
+                            print_r($ganancias_doce_meses);
+                        ?>
+                        <input type="text" name="Dato1" id="Dato1" value="<?php echo $ganancias_doce_meses['Ganancia'];?>">
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- ENCABEZADO GRAFICO -->

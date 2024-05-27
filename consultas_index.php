@@ -29,9 +29,19 @@
     //Producto mas vendido
     function ProductoMasVendido(){
         $conexion=conexion_db();
-        $consulta= "SELECT subquery.Nombre, SUM(subquery.Cantidad) AS TotalCantidad FROM ( SELECT ventas.ID_producto, .Pais, ventas.Cantidad, ventas.Precio_Unitario FROM ventas INNER JOIN clientes ON ventas.ID_Cliente = clientes.ID_Cliente ) AS subquery GROUP BY subquery.Pais ORDER BY `TotalCantidad` DESC";
+        $consulta= "SELECT subquery.Nombre, SUM(subquery.Cantidad) AS TotalCantidad FROM ( SELECT ventas.ID_producto, productos.Nombre, ventas.Cantidad, ventas.Precio_Unitario FROM ventas INNER JOIN productos ON ventas.ID_producto = productos.ID_Producto ) AS subquery GROUP BY subquery.Nombre ORDER BY `TotalCantidad` DESC";
         $result=mysqli_query($conexion, $consulta);
         return $result;
+    }
+
+
+    //Obtener las ganancias de los ultimos 12 meses
+    function GananciasDoceMeses(){
+        $conexion=conexion_db();
+        $consulta= "SELECT DATE_FORMAT(Fecha, '%Y-%m') AS Mes, SUM(Precio_Unitario * Cantidad) AS Ganancia FROM ventas WHERE Fecha >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH) GROUP BY DATE_FORMAT(Fecha, '%Y-%m') ORDER BY Mes DESC";
+        $result=mysqli_query($conexion, $consulta);
+        $fila = $result->fetch_assoc();
+        return $fila;
     }
 
 
