@@ -251,12 +251,19 @@
 
 
                         <!-- GRAFICO CIRCULAR -->
+                        <?php
+                            $productos_nombre = NombreProductoMasVendidos();
+                            $productos_nombre_string = StringNombreProductoMasVendidos($productos_nombre);
+                            $productos_cantidad = CantidadProductoMasVendidos();
+                        ?>
+                        <input type="hidden" name="ProductosNombre" id="ProductosNombre" value="<?php echo $productos_nombre_string;?>">
+                        <input type="hidden" name="ProductosCantidad" id="ProductosCantidad" value="<?php echo $productos_cantidad;?>">
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- ENCABEZADO GRAFICO CIRCULAR -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Productos vendidos</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">5 Productos mas vendidos</h6>
                                 </div>
 
                                 <!-- CONTENIDO GRAFICO CIRCULAR -->
@@ -265,15 +272,25 @@
                                         <canvas id="myPieChart"></canvas>
                                     </div>
                                     <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
+                                        <div>
+                                            <span class="mr-1">
+                                                <i class="fas fa-circle text-primary"></i> <?php echo $productos_nombre[0];?>
+                                            </span>
+                                            <span class="mr-1">
+                                                <i class="fas fa-circle text-success"></i> <?php echo $productos_nombre[1];?>
+                                            </span>
+                                            <span class="mr-1">
+                                                <i class="fas fa-circle text-info"></i> <?php echo $productos_nombre[2];?>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-warning"></i> <?php echo $productos_nombre[3];?>
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-danger"></i> <?php echo $productos_nombre[4];?>
+                                            </span>
+                                        </div>                                  
                                     </div>
                                 </div>
                             </div>

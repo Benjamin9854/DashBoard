@@ -9,7 +9,6 @@
         return $result;
     }
 
-
     //Obtener las ganacias del año actual
     function GananciasAnnoActual(){
         $conexion=conexion_db();
@@ -35,6 +34,8 @@
     }
 
 
+
+
     //Obtener las ganancias de los ultimos 12 meses
     function GananciasDoceMeses(){
         $conexion=conexion_db();
@@ -52,6 +53,55 @@
         $ganancias = GananciasDoceMeses();
         $ganancias_string = implode(",", $ganancias);
         return $ganancias_string;
+    }
+
+
+    
+
+    // Obtener los nombre de los 5 productos más vendido
+    function NombreProductoMasVendidos(){
+        $conexion = conexion_db();
+        $consulta = "SELECT subquery.Nombre, SUM(subquery.Cantidad) AS TotalCantidad 
+                    FROM (
+                        SELECT ventas.ID_producto, productos.Nombre, ventas.Cantidad, ventas.Precio_Unitario 
+                        FROM ventas 
+                        INNER JOIN productos ON ventas.ID_producto = productos.ID_Producto 
+                    ) AS subquery 
+                    GROUP BY subquery.Nombre 
+                    ORDER BY TotalCantidad DESC 
+                    LIMIT 5";
+        $result = mysqli_query($conexion, $consulta);
+        $productos = [];
+        while ($fila = $result->fetch_assoc()) {
+            $productos[] = $fila['Nombre'];
+        }
+        return $productos;
+    }
+
+    function StringNombreProductoMasVendidos($productos){
+        $productos_string = implode(",", $productos);
+        return $productos_string;
+    }
+
+    // Obtener la cantidad de los 5 producto más vendido
+    function CantidadProductoMasVendidos(){
+        $conexion = conexion_db();
+        $consulta = "SELECT subquery.Nombre, SUM(subquery.Cantidad) AS TotalCantidad 
+                    FROM (
+                        SELECT ventas.ID_producto, productos.Nombre, ventas.Cantidad, ventas.Precio_Unitario 
+                        FROM ventas 
+                        INNER JOIN productos ON ventas.ID_producto = productos.ID_Producto 
+                    ) AS subquery 
+                    GROUP BY subquery.Nombre 
+                    ORDER BY TotalCantidad DESC 
+                    LIMIT 5";
+        $result = mysqli_query($conexion, $consulta);
+        $productos = [];
+        while ($fila = $result->fetch_assoc()) {
+            $productos[] = $fila['TotalCantidad'];
+        }
+        $productos_string = implode(",", $productos);
+        return $productos_string;
     }
 
 

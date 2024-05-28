@@ -28,14 +28,20 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 // Area Chart Example
+var gananciasString = document.getElementById("GananciasMeses").value;
+var gananciasArray = gananciasString.split(",");
+var gananciasIntArray = new Array(gananciasArray.length);
+for (var i = 0; i < gananciasArray.length; i++) {
+  gananciasIntArray[i] = parseInt(gananciasArray[i], 10);
+}
 
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"],
+    labels: ["Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", "Enero", "Febrero", "Marzo", "Abril", "Mayo"],
     datasets: [{
-      label: "Earnings",
+      label: "Ganancias",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
@@ -47,7 +53,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 20000],
+      data: [gananciasIntArray[11], gananciasIntArray[10], gananciasIntArray[9], gananciasIntArray[8], gananciasIntArray[7], gananciasIntArray[6], gananciasIntArray[5], gananciasIntArray[4], gananciasIntArray[3], gananciasIntArray[2], gananciasIntArray[1], gananciasIntArray[0]],
     }],
   },
   options: {
