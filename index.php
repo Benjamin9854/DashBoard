@@ -229,10 +229,9 @@
 
                         <!-- GRAFICO -->
                         <?php
-                            $ganancias_doce_meses = GananciasDoceMeses();
-                            print_r($ganancias_doce_meses);
+                            $ganancias_doce_meses = CrearStringDeGanancias();
                         ?>
-                        <input type="text" name="Dato1" id="Dato1" value="<?php echo $ganancias_doce_meses['Ganancia'];?>">
+                        <input type="hidden" name="GananciasMeses" id="GananciasMeses" value="<?php echo $ganancias_doce_meses;?>">
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- ENCABEZADO GRAFICO -->

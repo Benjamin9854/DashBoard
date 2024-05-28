@@ -40,8 +40,18 @@
         $conexion=conexion_db();
         $consulta= "SELECT DATE_FORMAT(Fecha, '%Y-%m') AS Mes, SUM(Precio_Unitario * Cantidad) AS Ganancia FROM ventas WHERE Fecha >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH) GROUP BY DATE_FORMAT(Fecha, '%Y-%m') ORDER BY Mes DESC";
         $result=mysqli_query($conexion, $consulta);
-        $fila = $result->fetch_assoc();
-        return $fila;
+        $ganancias = [];
+        while ($fila = $result->fetch_assoc()) {
+            $ganancias[] = $fila['Ganancia'];
+        }
+        return $ganancias;
+    }
+
+    // Función para crear una cadena de texto con todas las ganancias separadas por una coma
+    function CrearStringDeGanancias() {
+        $ganancias = GananciasDoceMeses();
+        $ganancias_string = implode(",", $ganancias);
+        return $ganancias_string;
     }
 
 
