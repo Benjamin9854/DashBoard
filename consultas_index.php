@@ -1,6 +1,7 @@
 <?php
     include("conexion.php");
 
+    //PARA LOS CARDS
     //Obtener las ganancias del mes actual
     function GananciaMesActual(){
         $conexion=conexion_db();
@@ -36,6 +37,7 @@
 
 
 
+    //PARA EL PRIMER GRAFICO
     //Obtener las ganancias de los ultimos 12 meses
     function GananciasDoceMeses(){
         $conexion=conexion_db();
@@ -58,6 +60,7 @@
 
     
 
+    //PARA EL GRAFICO CIRCULAR
     // Obtener los nombre de los 5 productos más vendido
     function NombreProductoMasVendidos(){
         $conexion = conexion_db();
@@ -103,6 +106,57 @@
         $productos_string = implode(",", $productos);
         return $productos_string;
     }
+
+
+    
+
+    //PARA EL CARD DE LOS PAISES MAS DEMANDANTES
+    //Obtener el nombre de los 5 paises con mas ventas
+    function NombresPaisesMayorVentas(){
+        $conexion=conexion_db();
+        $consulta= "SELECT subquery.Pais, SUM(subquery.Cantidad) AS TotalCantidad FROM ( SELECT ventas.ID_Cliente, clientes.Pais, ventas.Cantidad, ventas.Precio_Unitario FROM ventas INNER JOIN clientes ON ventas.ID_Cliente = clientes.ID_Cliente ) AS subquery GROUP BY subquery.Pais ORDER BY `TotalCantidad` DESC LIMIT 5";
+        $result=mysqli_query($conexion, $consulta);
+        $nombres = [];
+        while ($fila = $result->fetch_assoc()) {
+            $nombres[] = $fila['Pais'];
+        }
+        return $nombres;
+    }
+
+    function StringNombrePaisesMasVentas($nombres){
+        $nombres_string = implode(",", $nombres);
+        return $nombres_string;
+    }
+
+    //Obtener la cantidad de ventas de los 5 paises con mas ventas
+    function CantidadPaisesMayorVentas(){
+        $conexion=conexion_db();
+        $consulta= "SELECT subquery.Pais, SUM(subquery.Cantidad) AS TotalCantidad FROM ( SELECT ventas.ID_Cliente, clientes.Pais, ventas.Cantidad, ventas.Precio_Unitario FROM ventas INNER JOIN clientes ON ventas.ID_Cliente = clientes.ID_Cliente ) AS subquery GROUP BY subquery.Pais ORDER BY `TotalCantidad` DESC LIMIT 5";
+        $result=mysqli_query($conexion, $consulta);
+        $cantidad = [];
+        while ($fila = $result->fetch_assoc()) {
+            $cantidad[] = $fila['TotalCantidad'];
+        }
+        return $cantidad;
+    }
+
+    function StringCantidadPaisesMasVentas($cantidad){
+        $cantidad_string = implode(",", $cantidad);
+        return $cantidad_string;
+    }
+
+    //Pasar la cantidad de ventas a porcentajes
+    function CantidadesAPorcentajes($cantidades){
+        $total = array_sum($cantidades);
+        $porcentajes = [];
+        foreach ($cantidades as $cantidad) {
+            $porcentaje = ($cantidad / $total) * 100;
+            $porcentajes[] = $porcentaje;
+        }
+        return $porcentajes;
+    }
+
+
 
 
 

@@ -241,7 +241,7 @@
                                 </div>
 
                                 <!-- CONTENIDO GRAFICO -->
-                                <div class="card-body">
+                                <div class="card-body border-left-primary border-bottom-primary">
                                     <div class="chart-area">
                                         <canvas id="myAreaChart"></canvas>
                                     </div>
@@ -263,11 +263,11 @@
                                 <!-- ENCABEZADO GRAFICO CIRCULAR -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">5 Productos mas vendidos</h6>
+                                    <h6 class="m-0 font-weight-bold text-warning">5 Productos mas vendidos</h6>
                                 </div>
 
                                 <!-- CONTENIDO GRAFICO CIRCULAR -->
-                                <div class="card-body">
+                                <div class="card-body border-left-warning border-bottom-warning">
                                     <div class="chart-pie pt-4 pb-2">
                                         <canvas id="myPieChart"></canvas>
                                     </div>
@@ -306,42 +306,55 @@
                         <!-- Content Column -->
                         <div class="col-lg-6 mb-4">
 
-                            <!-- Project Card Example -->
+                            <!-- CARD PARA LOS PAISES MAS DEMANDANTES -->
+                            <?php
+                                $paises_nombre = NombresPaisesMayorVentas();
+                                $paises_cantidad = CantidadPaisesMayorVentas();
+                                $paises_cantidad_porcentaje = CantidadesAPorcentajes($paises_cantidad);
+                                $total = array_sum($paises_cantidad);
+                            ?>
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                                    <h6 class="m-0 font-weight-bold text-info">Paises mas demandantes</h6>
                                 </div>
-                                <div class="card-body">
-                                    <h4 class="small font-weight-bold">Server Migration <span
-                                            class="float-right">20%</span></h4>
+                                <div class="card-body  border-left-info border-bottom-info">
+                                    <h4 class="small font-weight-bold"><?php echo $paises_nombre[0];?> <span
+                                            class="float-right"><?php echo $paises_cantidad[0];?> ventas</span></h4>
                                     <div class="progress mb-4">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo round($paises_cantidad_porcentaje[0]);?>%"
                                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <h4 class="small font-weight-bold">Sales Tracking <span
-                                            class="float-right">40%</span></h4>
+                                    <h4 class="small font-weight-bold"><?php echo $paises_nombre[1];?> <span
+                                            class="float-right"><?php echo $paises_cantidad[1];?> ventas</span></h4>
                                     <div class="progress mb-4">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo round($paises_cantidad_porcentaje[1]);?>%"
                                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <h4 class="small font-weight-bold">Customer Database <span
-                                            class="float-right">60%</span></h4>
+                                    <h4 class="small font-weight-bold"><?php echo $paises_nombre[2];?> <span
+                                            class="float-right"><?php echo $paises_cantidad[2];?> ventas</span></h4>
                                     <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar" style="width: 60%"
+                                        <div class="progress-bar" role="progressbar" style="width: <?php echo round($paises_cantidad_porcentaje[2]);?>%"
                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <h4 class="small font-weight-bold">Payout Details <span
-                                            class="float-right">80%</span></h4>
+                                    <h4 class="small font-weight-bold"><?php echo $paises_nombre[3];?> <span
+                                            class="float-right"><?php echo $paises_cantidad[3];?> ventas</span></h4>
                                     <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo round($paises_cantidad_porcentaje[3]);?>%"
                                             aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <h4 class="small font-weight-bold">Account Setup <span
-                                            class="float-right">Complete!</span></h4>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                    <h4 class="small font-weight-bold"><?php echo $paises_nombre[4];?> <span
+                                            class="float-right"><?php echo $paises_cantidad[4];?> ventas</span></h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo round($paises_cantidad_porcentaje[4]);?>%"
                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
+                                    <h4 class="small font-weight-bold">Total<span
+                                            class="float-right"><?php echo $total;?> ventas</span></h4>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-dark" role="progressbar" style="width: 100%"
+                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
