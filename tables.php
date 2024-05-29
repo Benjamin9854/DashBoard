@@ -141,7 +141,6 @@ $total_pages = ceil($total_records / $records_per_page);
 
                     <!-- Formulario para seleccionar la tabla -->
 <form method="GET" action="" class="form-inline mb-4">
-    <label for="tableSelect" class="mr-2">Seleccionar Tabla:</label>
     <select name="table" id="tableSelect" class="form-control mr-2" onchange="this.form.submit()">
         <option value="empleados" <?php if ($table == 'empleados') echo 'selected'; ?>>Empleados</option>
         <option value="clientes" <?php if ($table == 'clientes') echo 'selected'; ?>>Clientes</option>
@@ -150,34 +149,6 @@ $total_pages = ceil($total_records / $records_per_page);
     </select>
 </form>
 
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>                        
-                        
-                    </ul>
 
                 </nav>
                 <!-- End of Topbar -->
