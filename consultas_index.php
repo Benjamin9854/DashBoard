@@ -160,57 +160,25 @@
 
 
 
-
-
-    //VENTAS
-    //PREGUNTA 3
-    //Obtener las 10 ventas con menor valor al multiplicar CANTIDAD por PRECIO_UNITARIO
-    function ventasPregunta3(){
-        $conexion=conexion_db();
-        $consulta= "SELECT *, Cantidad * Precio_Unitario AS Ganancia FROM ventas ORDER BY Ganancia LIMIT 10";
-        $result=mysqli_query($conexion, $consulta);
-        return $result;
+    //PARA EL SEGUNDO GRAFICOS DE GANANCIAS ANUALES
+    function GananciasAnualesDesde2018() {
+        $conexion = conexion_db();
+        $consulta = "SELECT DATE_FORMAT(Fecha, '%Y') AS Año, SUM(Precio_Unitario * Cantidad) AS Ganancia 
+                     FROM ventas 
+                     WHERE YEAR(Fecha) >= 2018 
+                     GROUP BY DATE_FORMAT(Fecha, '%Y') 
+                     ORDER BY Año DESC";
+        $result = mysqli_query($conexion, $consulta);
+        $ganancias = [];
+        while ($fila = $result->fetch_assoc()) {
+            $ganancias[] = $fila['Ganancia'];
+        }
+        return $ganancias;
     }
 
-    //VENTAS
-    //PREGUNTA 4
-    //Obtener las ventas que tengan una cantidad menor o igual a 10
-    function ventasPregunta4(){
-        $conexion=conexion_db();
-        $consulta= "SELECT * FROM ventas WHERE Cantidad <= 10";
-        $result=mysqli_query($conexion, $consulta);
-        return $result;
-    }
-
-    //VENTAS
-    //PREGUNTA 5
-    //Obtener el promedio de cantidad de ventas de cada 3 meses hasta 24 meses
-    function ventasPregunta5(){
-        $conexion=conexion_db();
-        $consulta= "SELECT YEAR(Fecha) AS Anio, QUARTER(Fecha) AS Trimestre, ROUND(AVG(Cantidad)) AS Promedio_Ventas FROM ventas WHERE Fecha >= DATE_SUB(CURDATE(), INTERVAL 2 YEAR) GROUP BY YEAR(Fecha), QUARTER(Fecha) ORDER BY Anio DESC, Trimestre DESC";
-        $result=mysqli_query($conexion, $consulta);
-        return $result;
-    }
-
-    //CLIENTES
-    //PREGUNTA 1
-    //Cuanto clientes son del PAIS China
-    function clientesPregunta1(){
-        $conexion=conexion_db();
-        $consulta= "SELECT * FROM clientes WHERE Pais = 'China'";
-        $result=mysqli_query($conexion, $consulta);
-        return $result;
-    }
-
-    //CLIENTES
-    //PREGUNTA 2
-    //Desde que pais se compran mas productos
-    function clientesPregunta2(){
-        $conexion=conexion_db();
-        $consulta= "SELECT subquery.Pais, SUM(subquery.Cantidad) AS TotalCantidad FROM ( SELECT ventas.ID_Cliente, clientes.Pais, ventas.Cantidad, ventas.Precio_Unitario FROM ventas INNER JOIN clientes ON ventas.ID_Cliente = clientes.ID_Cliente ) AS subquery GROUP BY subquery.Pais ORDER BY `TotalCantidad` DESC";
-
-
-        $result=mysqli_query($conexion, $consulta);
-        return $result;
-    }
+    function CrearStringDeGananciasAnuales() {
+        $ganancias = GananciasAnualesDesde2018();
+        $ganancias_string = implode(",", $ganancias);
+        return $ganancias_string;
+    }    
 ?>

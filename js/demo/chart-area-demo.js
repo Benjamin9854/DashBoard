@@ -128,18 +128,18 @@ var myLineChart = new Chart(ctx, {
 
 
 // Area Chart Example 2
-var gananciasString = document.getElementById("GananciasMeses").value;
-var gananciasArray = gananciasString.split(",");
-var gananciasIntArray = new Array(gananciasArray.length);
-for (var i = 0; i < gananciasArray.length; i++) {
-  gananciasIntArray[i] = parseInt(gananciasArray[i], 10);
+var gananciasString2 = document.getElementById("GananciasMeses2").value;
+var gananciasArray2 = gananciasString2.split(",");
+var gananciasIntArray2 = new Array(gananciasArray2.length);
+for (var i = 0; i < gananciasArray2.length; i++) {
+  gananciasIntArray2[i] = parseInt(gananciasArray2[i], 10);
 }
 
-var ctx = document.getElementById("myAreaChart");
-var myLineChart = new Chart(ctx, {
+var ctx2 = document.getElementById("myAreaChart2");
+var myLineChart = new Chart(ctx2, {
   type: 'line',
   data: {
-    labels: ["Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", "Enero", "Febrero", "Marzo", "Abril", "Mayo"],
+    labels: ["2018", "2019", "2020", "2021", "2022", "2023", "2024"],
     datasets: [{
       label: "Ganancias",
       lineTension: 0.3,
@@ -153,7 +153,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [gananciasIntArray[11], gananciasIntArray[10], gananciasIntArray[9], gananciasIntArray[8], gananciasIntArray[7], gananciasIntArray[6], gananciasIntArray[5], gananciasIntArray[4], gananciasIntArray[3], gananciasIntArray[2], gananciasIntArray[1], gananciasIntArray[0]],
+      data: [gananciasIntArray2[6], gananciasIntArray2[5], gananciasIntArray2[4], gananciasIntArray2[3], gananciasIntArray2[2], gananciasIntArray2[1], gananciasIntArray2[0]],
     }],
   },
   options: {

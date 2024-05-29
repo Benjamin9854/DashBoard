@@ -292,19 +292,19 @@
                         
                         <!-- GRAFICO -->
                         <?php
-                            $ganancias_doce_meses2 = CrearStringDeGanancias();
+                            $ganancias_anuales = CrearStringDeGananciasAnuales();
                         ?>
-                        <input type="hidden" name="GananciasMeses2" id="GananciasMeses2" value="<?php echo $ganancias_doce_meses2;?>">
+                        <input type="hidden" name="GananciasMeses2" id="GananciasMeses2" value="<?php echo $ganancias_anuales;?>">
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- ENCABEZADO GRAFICO -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Ganancias mensuales</h6>
+                                    <h6 class="m-0 font-weight-bold text-success">Ganancias anuales</h6>
                                 </div>
 
                                 <!-- CONTENIDO GRAFICO -->
-                                <div class="card-body border-left-primary border-bottom-primary">
+                                <div class="card-body border-left-success border-bottom-success">
                                     <div class="chart-area">
                                         <canvas id="myAreaChart2"></canvas>
                                     </div>
